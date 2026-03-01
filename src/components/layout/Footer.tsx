@@ -14,10 +14,10 @@ export function Footer({ isDark }: FooterProps) {
                     © {new Date().getFullYear()} OMAR ABBAD. ALL RIGHTS RESERVED.
                 </Typography>
                 <div className="flex gap-4">
-                    <Typography variant="label" as="a" href="#" className={`cursor-pointer transition-colors ${isDark ? 'text-white/30 hover:text-white/70' : 'hover:text-text-primary'}`}>
+                    <Typography variant="label" as="a" href="https://github.com/omarabbad" target="_blank" rel="noopener noreferrer" className={`cursor-pointer transition-colors ${isDark ? 'text-white/30 hover:text-white/70' : 'hover:text-text-primary'}`}>
                         GITHUB
                     </Typography>
-                    <Typography variant="label" as="a" href="#" className={`cursor-pointer transition-colors ${isDark ? 'text-white/30 hover:text-white/70' : 'hover:text-text-primary'}`}>
+                    <Typography variant="label" as="a" href="https://www.linkedin.com/in/omar-abbad-327427321/" target="_blank" rel="noopener noreferrer" className={`cursor-pointer transition-colors ${isDark ? 'text-white/30 hover:text-white/70' : 'hover:text-text-primary'}`}>
                         LINKEDIN
                     </Typography>
                 </div>

@@ -19,9 +19,12 @@ const textVariants = cva('text-text-primary', {
 });
 
 export interface TypographyProps
-    extends React.HTMLAttributes<HTMLHeadingElement | HTMLParagraphElement | HTMLSpanElement>,
+    extends React.HTMLAttributes<HTMLElement>,
     VariantProps<typeof textVariants> {
     as?: React.ElementType;
+    href?: string;
+    target?: string;
+    rel?: string;
 }
 
 export function Typography({ className, variant, as: Component = 'p', ...props }: TypographyProps) {

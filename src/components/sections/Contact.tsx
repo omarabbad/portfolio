@@ -39,7 +39,7 @@ export function Contact({ isDark }: ContactProps) {
                             size="lg"
                             className={isDark ? 'border-white/20 text-[#E8E8E5] hover:bg-white/5' : ''}
                         >
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+                            <a href="https://www.linkedin.com/in/omar-abbad-327427321/" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
                         </Button>
                     </div>
                 </motion.div>
