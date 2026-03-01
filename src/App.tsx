@@ -7,6 +7,7 @@ import { Projects } from '@/components/sections/Projects';
 import { About } from '@/components/sections/About';
 import { Contact } from '@/components/sections/Contact';
 import { CustomCursor } from '@/components/ui/CustomCursor';
+import { BackgroundGrid } from '@/components/ui/BackgroundGrid';
 import { useTheme } from '@/lib/useTheme';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 
     return (
         <div className={`min-h-screen flex flex-col relative w-full overflow-x-hidden transition-colors duration-300 ${isDark ? 'text-[#E8E8E5]' : 'text-text-primary'}`}>
+            <BackgroundGrid isDark={isDark} />
             <CustomCursor isDark={isDark} />
             <Navbar isDark={isDark} onToggle={toggle} />
             <main className="flex-grow">

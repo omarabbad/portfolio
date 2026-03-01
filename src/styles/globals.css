@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+}
+
 @layer base {
   * {
     cursor: none !important;
@@ -9,39 +14,24 @@
 
   body {
     @apply text-text-primary font-mono antialiased;
-    background:
-      linear-gradient(to right, rgba(200, 200, 200, 0.3) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(200, 200, 200, 0.3) 1px, transparent 1px),
-      linear-gradient(135deg, #F5F5F2 0%, #E8E8E5 50%, #F5F5F2 100%);
-    background-size: 48px 48px, 48px 48px, 400% 400%;
-    background-attachment: fixed, fixed, fixed;
+    background: linear-gradient(135deg, #F5F5F2 0%, #E8E8E5 50%, #F5F5F2 100%);
+    background-size: 400% 400%;
+    background-attachment: fixed;
     animation: gradientMove 15s ease infinite;
   }
 
   .dark body {
     @apply text-[#E8E8E5];
-    /* The animated gradient (black to dark grey) goes FIRST (bottom layer), then the grid lines (top layer) */
-    background:
-      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(135deg, #050505 0%, #1a1a1a 50%, #050505 100%);
-    background-size: 48px 48px, 48px 48px, 400% 400%;
-    background-attachment: fixed, fixed, fixed;
+    background: linear-gradient(135deg, #050505 0%, #1a1a1a 50%, #050505 100%);
+    background-size: 400% 400%;
+    background-attachment: fixed;
     animation: gradientMove 15s ease infinite;
   }
 
   @keyframes gradientMove {
-    0% {
-      background-position: 0 0, 0 0, 0% 50%;
-    }
-
-    50% {
-      background-position: 0 0, 0 0, 100% 50%;
-    }
-
-    100% {
-      background-position: 0 0, 0 0, 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   html {
