@@ -1,244 +1,237 @@
 import { motion } from 'framer-motion';
+import { CheckCircle2 } from 'lucide-react';
+import type { JSX } from 'react';
 
 interface AboutProps {
     isDark: boolean;
 }
 
-const skills = [
-    { category: 'Languages',        items: ['Python', 'Java', 'R', 'JavaScript', 'TypeScript', 'SQL'] },
-    { category: 'Frameworks',       items: ['React', 'Node.js', 'Express', 'Tailwind', 'Next.js'] },
-    { category: 'Database & Tools', items: ['MySQL', 'SQLite', 'MongoDB', 'Git', 'Linux'] },
-    { category: 'Concepts',         items: ['Machine Learning', 'Data Analysis', 'OOP', 'Networking'] },
+const highlights = [
+    'AI-powered systems that scale with your business',
+    'End-to-end data pipelines from ingestion to insight',
+    'Enterprise-grade software architecture and design',
+    'Full-stack web applications with modern tooling',
+    'Network infrastructure and Linux administration',
+    'Machine learning models for predictive analytics',
 ];
 
-export function About({ isDark }: AboutProps) {
-    const textPrimary   = isDark ? '#FFFFFF' : '#111111';
-    const textSecondary = isDark ? '#9A9A9A' : '#6B6B6B';
-    const borderColor   = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)';
-    const surfaceBg     = isDark ? '#111111' : '#FFFFFF';
+const skills = [
+    { category: 'Languages',   items: ['Python', 'Java', 'TypeScript', 'R', 'SQL'] },
+    { category: 'Frameworks',  items: ['React', 'Node.js', 'Next.js', 'Tailwind CSS'] },
+    { category: 'Data & AI',   items: ['Machine Learning', 'Data Pipelines', 'MongoDB', 'MySQL'] },
+    { category: 'Systems',     items: ['Linux', 'Networking', 'Git', 'Docker'] },
+];
+
+export function About({ isDark }: AboutProps): JSX.Element {
+    // Light section — inverted from global bg
+    const bg          = isDark ? '#111111' : '#F4F2E9';
+    const textPrimary = isDark ? '#F5F5F5' : '#000000';
+    const textMuted   = isDark ? '#B8B8B8' : '#555555';
+    const borderColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.1)';
+    const tagBg       = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
+    const tagColor    = isDark ? 'rgba(245,245,245,0.7)' : 'rgba(0,0,0,0.65)';
+    const checkColor  = isDark ? '#6B9FFF' : '#0E2BFF';
 
     return (
-        <section id="about" className="w-full py-24 md:py-32">
-            <div className="mx-auto w-full max-w-[1440px] px-6 md:px-12">
+        <section
+            id="about"
+            className="w-full"
+            style={{ background: bg, paddingTop: 120, paddingBottom: 120 }}
+        >
+            <div className="coda-container">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-                {/* Section label */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="mb-16 pb-6 flex items-end justify-between"
-                    style={{ borderBottom: `1px solid ${borderColor}` }}
-                >
-                    <div className="flex flex-col gap-3">
-                        <span
-                            className="font-sans font-medium text-[12px] tracking-[0.2em] uppercase"
-                            style={{ color: '#FF4D00' }}
-                        >
-                            Background
-                        </span>
-                        <h2
-                            className="font-sans font-extrabold leading-[1.0] tracking-[-0.02em]"
-                            style={{
-                                fontSize: 'clamp(48px, 6vw, 96px)',
-                                color: textPrimary,
-                            }}
-                        >
-                            About Me
-                        </h2>
-                    </div>
-                </motion.div>
-
-                {/* Asymmetric grid: left media block, right editorial text */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
-
-                    {/* LEFT — Media block */}
+                    {/* ── Left: Media block ── */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
+                        initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:col-span-5 lg:pr-16 lg:border-r flex flex-col gap-8"
-                        style={{ borderColor }}
+                        transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+                        className="flex flex-col gap-8"
                     >
-                        {/* Cinematic media placeholder */}
+                        {/* Avatar / initials block */}
                         <div
-                            className="relative w-full overflow-hidden"
+                            className="relative w-full rounded-[28px] overflow-hidden flex items-center justify-center"
                             style={{
-                                aspectRatio: '4/5',
+                                aspectRatio: '4/3',
                                 background: isDark
-                                    ? 'linear-gradient(160deg, #141414 0%, #1A1A1A 50%, #0F0F0F 100%)'
-                                    : 'linear-gradient(160deg, #E8E8E8 0%, #F0F0F0 50%, #E0E0E0 100%)',
-                                border: `1px solid ${borderColor}`,
+                                    ? 'linear-gradient(135deg, #0E2BFF 0%, #5C2BFF 100%)'
+                                    : 'linear-gradient(135deg, #0E2BFF 0%, #5C2BFF 100%)',
                             }}
                         >
-                            {/* Subtle accent glow */}
+                            {/* 3D blob decoration */}
                             <div
-                                className="absolute inset-0"
+                                className="absolute"
                                 style={{
-                                    background: 'radial-gradient(ellipse 60% 40% at 50% 80%, rgba(255,77,0,0.07) 0%, transparent 70%)',
+                                    width: 300,
+                                    height: 300,
+                                    background: 'radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%)',
+                                    borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
+                                    top: '-20%',
+                                    right: '-10%',
+                                    filter: 'blur(30px)',
+                                }}
+                            />
+                            <div
+                                className="absolute"
+                                style={{
+                                    width: 200,
+                                    height: 200,
+                                    background: 'radial-gradient(circle, rgba(92,43,255,0.6), transparent 70%)',
+                                    borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                                    bottom: '-10%',
+                                    left: '-5%',
+                                    filter: 'blur(25px)',
                                 }}
                             />
 
-                            {/* Large initials */}
-                            <div
-                                className="absolute inset-0 flex items-center justify-center select-none"
-                                style={{ opacity: isDark ? 0.06 : 0.07 }}
+                            {/* Initials */}
+                            <span
+                                className="relative z-10 font-sans font-black text-white select-none"
+                                style={{ fontSize: 'clamp(64px, 10vw, 96px)', letterSpacing: '-0.04em' }}
                             >
-                                <span
-                                    className="font-sans font-black"
-                                    style={{
-                                        fontSize: 'clamp(120px, 18vw, 220px)',
-                                        lineHeight: 1,
-                                        color: isDark ? '#FFFFFF' : '#000000',
-                                        letterSpacing: '-0.05em',
-                                    }}
-                                >
-                                    OA
-                                </span>
-                            </div>
-
-                            {/* Bottom caption bar */}
-                            <div
-                                className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-center justify-between"
-                                style={{
-                                    background: isDark
-                                        ? 'linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 100%)'
-                                        : 'linear-gradient(to top, rgba(245,245,245,0.9) 0%, transparent 100%)',
-                                }}
-                            >
-                                <span
-                                    className="font-sans font-medium text-[11px] tracking-[0.2em] uppercase"
-                                    style={{ color: isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)' }}
-                                >
-                                    Omar Abbad
-                                </span>
-                                <span
-                                    className="font-sans font-medium text-[11px] tracking-[0.2em] uppercase"
-                                    style={{ color: '#FF4D00' }}
-                                >
-                                    AI Dev
-                                </span>
-                            </div>
+                                OA
+                            </span>
                         </div>
 
-                        {/* Quick stats below image */}
-                        <div
-                            className="grid grid-cols-2 gap-px"
-                            style={{ border: `1px solid ${borderColor}` }}
-                        >
-                            {[
-                                { value: '5+',  label: 'Projects Completed' },
-                                { value: '4+',  label: 'Languages Mastered' },
-                                { value: '3+',  label: 'Years Learning'     },
-                                { value: '∞',   label: 'Problems Solved'    },
-                            ].map(({ value, label }) => (
-                                <div
-                                    key={label}
-                                    className="flex flex-col gap-1 p-5"
-                                    style={{
-                                        background: surfaceBg,
-                                        borderRight: `1px solid ${borderColor}`,
-                                        borderBottom: `1px solid ${borderColor}`,
-                                    }}
-                                >
+                        {/* Skill tags grid */}
+                        <div className="flex flex-col gap-5">
+                            {skills.map(({ category, items }) => (
+                                <div key={category} className="flex flex-col gap-2">
                                     <span
-                                        className="font-sans font-bold text-[28px] leading-none tracking-[-0.02em]"
-                                        style={{ color: textPrimary }}
+                                        className="label-text"
+                                        style={{ color: textMuted }}
                                     >
-                                        {value}
+                                        {category}
                                     </span>
-                                    <span
-                                        className="font-sans font-medium text-[11px] tracking-[0.15em] uppercase"
-                                        style={{ color: textSecondary }}
-                                    >
-                                        {label}
-                                    </span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {items.map((item) => (
+                                            <span
+                                                key={item}
+                                                className="font-sans font-medium rounded-full px-3 py-1"
+                                                style={{
+                                                    fontSize: 13,
+                                                    background: tagBg,
+                                                    color: tagColor,
+                                                    border: `1px solid ${borderColor}`,
+                                                }}
+                                            >
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
                             ))}
                         </div>
                     </motion.div>
 
-                    {/* RIGHT — Editorial text content */}
+                    {/* ── Right: Editorial text ── */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
+                        initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                        className="lg:col-span-7 lg:pl-16 flex flex-col gap-10"
+                        transition={{ duration: 0.7, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
+                        className="flex flex-col gap-8"
                     >
-                        {/* Bio paragraphs */}
-                        <div className="flex flex-col gap-6">
-                            <p
-                                className="font-sans font-normal text-[18px] leading-[1.7]"
-                                style={{ color: textSecondary }}
-                            >
-                                I am an Artificial Intelligence Developer with a passion for building
-                                scalable, intelligent systems. My focus lies in bridging the gap between
-                                complex data algorithms and robust enterprise architecture.
-                            </p>
-                            <p
-                                className="font-sans font-normal text-[18px] leading-[1.7]"
-                                style={{ color: textSecondary }}
-                            >
-                                With a strong foundation across multiple programming languages and frameworks,
-                                I specialize in developing solutions that optimize operations — from predictive
-                                modeling to comprehensive management systems and secure network infrastructures.
-                            </p>
-
-                            {/* Accent divider */}
-                            <div className="w-12 h-[2px]" style={{ background: '#FF4D00' }} />
+                        <div className="flex flex-col gap-4">
+                            <span className="label-text" style={{ color: textMuted }}>
+                                About
+                            </span>
+                            <h2 className="display-heading" style={{ color: textPrimary }}>
+                                Building Intelligent<br />Systems
+                            </h2>
                         </div>
 
-                        {/* Skills grid */}
-                        <div className="flex flex-col gap-6">
-                            <span
-                                className="font-sans font-medium text-[12px] tracking-[0.2em] uppercase"
-                                style={{ color: textSecondary, opacity: 0.6 }}
-                            >
-                                Technical Skills
-                            </span>
+                        <p
+                            className="font-sans font-normal"
+                            style={{ fontSize: 17, lineHeight: 1.7, color: textMuted }}
+                        >
+                            I'm Omar Abbad, an AI Developer and software engineer with a passion
+                            for building intelligent, scalable systems. I specialize in bridging
+                            the gap between data science and production engineering — turning
+                            complex problems into elegant, high-performance solutions.
+                        </p>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px"
-                                style={{ border: `1px solid ${borderColor}` }}
-                            >
-                                {skills.map((group, index) => (
-                                    <motion.div
-                                        key={index}
-                                        initial={{ opacity: 0, y: 16 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.4, delay: index * 0.07 }}
-                                        className="flex flex-col gap-4 p-6"
-                                        style={{
-                                            background: surfaceBg,
-                                            borderRight: `1px solid ${borderColor}`,
-                                            borderBottom: `1px solid ${borderColor}`,
-                                        }}
+                        <p
+                            className="font-sans font-normal"
+                            style={{ fontSize: 17, lineHeight: 1.7, color: textMuted }}
+                        >
+                            From machine learning pipelines to enterprise web applications,
+                            I bring a full-stack perspective to every project — combining
+                            deep technical expertise with a focus on clean architecture
+                            and measurable outcomes.
+                        </p>
+
+                        {/* Highlights checklist */}
+                        <div className="flex flex-col gap-3 pt-2">
+                            {highlights.map((item) => (
+                                <div key={item} className="flex items-start gap-3">
+                                    <CheckCircle2
+                                        size={18}
+                                        strokeWidth={2}
+                                        style={{ color: checkColor, flexShrink: 0, marginTop: 2 }}
+                                    />
+                                    <span
+                                        className="font-sans font-normal"
+                                        style={{ fontSize: 15, lineHeight: 1.5, color: textMuted }}
                                     >
-                                        <span
-                                            className="font-sans font-medium text-[11px] tracking-[0.2em] uppercase"
-                                            style={{ color: '#FF4D00', opacity: 0.8 }}
-                                        >
-                                            {group.category}
-                                        </span>
-                                        <div className="flex flex-wrap gap-2">
-                                            {group.items.map((item, i) => (
-                                                <span
-                                                    key={i}
-                                                    className="font-sans font-normal text-[13px] px-2.5 py-1"
-                                                    style={{
-                                                        border: `1px solid ${borderColor}`,
-                                                        color: textSecondary,
-                                                    }}
-                                                >
-                                                    {item}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
+                                        {item}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* CTA */}
+                        <div className="flex items-center gap-4 pt-2">
+                            <button
+                                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="inline-flex items-center font-sans font-semibold rounded-full transition-all duration-300"
+                                style={{
+                                    height: 48,
+                                    paddingLeft: 24,
+                                    paddingRight: 24,
+                                    fontSize: 15,
+                                    background: isDark ? '#F5F5F5' : '#000000',
+                                    color:      isDark ? '#000000' : '#FFFFFF',
+                                }}
+                                onMouseEnter={(e) => {
+                                    (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)';
+                                    (e.currentTarget as HTMLElement).style.opacity = '0.9';
+                                }}
+                                onMouseLeave={(e) => {
+                                    (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+                                    (e.currentTarget as HTMLElement).style.opacity = '1';
+                                }}
+                            >
+                                Get in Touch
+                            </button>
+                            <a
+                                href="https://github.com/omarabbad"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center font-sans font-semibold rounded-full transition-all duration-300"
+                                style={{
+                                    height: 48,
+                                    paddingLeft: 24,
+                                    paddingRight: 24,
+                                    fontSize: 15,
+                                    background: 'transparent',
+                                    color: textMuted,
+                                    border: `1px solid ${borderColor}`,
+                                }}
+                                onMouseEnter={(e) => {
+                                    (e.currentTarget as HTMLElement).style.color = textPrimary;
+                                    (e.currentTarget as HTMLElement).style.borderColor = isDark
+                                        ? 'rgba(255,255,255,0.25)'
+                                        : 'rgba(0,0,0,0.25)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    (e.currentTarget as HTMLElement).style.color = textMuted;
+                                    (e.currentTarget as HTMLElement).style.borderColor = borderColor;
+                                }}
+                            >
+                                View GitHub
+                            </a>
                         </div>
                     </motion.div>
                 </div>

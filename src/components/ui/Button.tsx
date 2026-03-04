@@ -1,33 +1,37 @@
-import React from 'react';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { motion, HTMLMotionProps } from 'framer-motion';
+import React from 'react';
 
 const buttonVariants = cva(
     [
         'inline-flex items-center justify-center whitespace-nowrap',
-        'font-sans font-medium text-[14px] tracking-[0.05em] uppercase',
-        'transition-all duration-300 ease-out',
-        'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FF4D00]',
+        'font-sans font-semibold text-[14px] tracking-[0.02em]',
+        'rounded-full',
+        'transition-all duration-300',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30',
         'disabled:pointer-events-none disabled:opacity-40',
+        'select-none',
     ].join(' '),
     {
         variants: {
             variant: {
-                // Primary — solid accent fill
-                default: 'bg-[#FF4D00] text-white hover:bg-[#E64400]',
-                // Outline — thin border, transparent bg
-                outline: 'border border-current bg-transparent',
-                // Ghost — no border
-                ghost: 'bg-transparent',
-                // Text link style
-                link: 'bg-transparent underline-offset-4 hover:underline p-0 h-auto',
+                // Primary — white fill (works on dark bg)
+                default: 'bg-white text-black hover:bg-white/90',
+                // Dark fill — for light sections
+                dark: 'bg-black text-white hover:bg-black/80',
+                // Outline
+                outline: 'border border-white/20 bg-transparent text-white hover:bg-white/5',
+                // Outline dark — for light sections
+                'outline-dark': 'border border-black/20 bg-transparent text-black hover:bg-black/5',
+                // Ghost
+                ghost: 'bg-transparent text-white/70 hover:text-white',
             },
             size: {
-                default: 'h-12 px-8 py-3',
-                sm: 'h-9 px-5 text-[12px]',
-                lg: 'h-14 px-10 text-[15px]',
-                icon: 'h-10 w-10',
+                default: 'h-12 px-6 text-[14px]',
+                sm:      'h-9  px-5 text-[13px]',
+                lg:      'h-14 px-8 text-[15px]',
+                icon:    'h-10 w-10',
             },
         },
         defaultVariants: {
@@ -45,28 +49,14 @@ export interface ButtonProps
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant, size, isDark = true, style, ...props }, ref) => {
-        const isOutline = variant === 'outline';
-        const isGhost = variant === 'ghost';
-
-        const outlineColor = isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)';
-        const outlineTextColor = isDark ? '#FFFFFF' : '#111111';
-        const ghostTextColor = isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)';
-
-        const dynamicStyle: React.CSSProperties = isOutline
-            ? { borderColor: outlineColor, color: outlineTextColor }
-            : isGhost
-            ? { color: ghostTextColor }
-            : {};
-
+    ({ className, variant, size, isDark = true, ...props }, ref) => {
         return (
             <motion.button
                 className={cn(buttonVariants({ variant, size, className }))}
                 ref={ref}
-                whileHover={{ y: -2 }}
+                whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
-                style={{ ...dynamicStyle, ...style }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                 {...props}
             />
         );

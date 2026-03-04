@@ -9,87 +9,107 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                // Core palette
-                background: {
-                    DEFAULT: '#F5F5F5',
-                    dark: '#0A0A0A',
+                // ── Global backgrounds ──────────────────────────────────
+                'coda-dark':  '#000000',
+                'coda-light': '#F4F2E9',
+
+                // ── Text ────────────────────────────────────────────────
+                'text-primary':   '#F5F5F5',
+                'text-secondary': '#B8B8B8',
+                'text-dark':      '#000000',
+                'text-muted':     '#555555',
+
+                // ── Product card palettes ────────────────────────────────
+                card: {
+                    blue:   '#0E2BFF',
+                    green:  '#0B7C47',
+                    pink:   '#C61A73',
+                    purple: '#5C2BFF',
                 },
+
+                // ── Accent ───────────────────────────────────────────────
+                accent: '#0E2BFF',
+
+                // ── Surface (dark mode cards/panels) ─────────────────────
                 surface: {
-                    DEFAULT: '#EBEBEB',
-                    dark: '#141414',
+                    DEFAULT: '#111111',
+                    light:   '#FFFFFF',
                 },
-                text: {
-                    primary: '#111111',
-                    secondary: '#6B6B6B',
-                    'primary-dark': '#FFFFFF',
-                    'secondary-dark': '#9A9A9A',
-                },
+
+                // ── Border ───────────────────────────────────────────────
                 border: {
-                    DEFAULT: 'rgba(0,0,0,0.1)',
-                    dark: 'rgba(255,255,255,0.08)',
-                },
-                accent: {
-                    DEFAULT: '#FF4D00',
-                    hover: '#E64400',
+                    dark:  'rgba(255,255,255,0.1)',
+                    light: 'rgba(0,0,0,0.1)',
                 },
             },
+
             fontFamily: {
-                sans: ['"Space Grotesk"', 'sans-serif'],
-                mono: ['"Space Grotesk"', 'sans-serif'],
+                sans: ['"Inter Tight"', 'Inter', 'sans-serif'],
             },
+
             fontSize: {
-                'hero': ['clamp(80px, 10vw, 160px)', { lineHeight: '0.9', letterSpacing: '-0.02em', fontWeight: '900' }],
-                'display': ['clamp(48px, 6vw, 96px)', { lineHeight: '1.0', letterSpacing: '-0.02em', fontWeight: '800' }],
-                'heading': ['clamp(32px, 4vw, 56px)', { lineHeight: '1.1', letterSpacing: '-0.01em', fontWeight: '700' }],
-                'subheading': ['clamp(20px, 2.5vw, 28px)', { lineHeight: '1.3', fontWeight: '600' }],
-                'body-lg': ['18px', { lineHeight: '1.7', fontWeight: '400' }],
-                'body': ['16px', { lineHeight: '1.6', fontWeight: '400' }],
-                'label': ['12px', { lineHeight: '1', letterSpacing: '0.2em', fontWeight: '500' }],
-                'caption': ['11px', { lineHeight: '1.4', letterSpacing: '0.1em', fontWeight: '400' }],
+                // Hero headline — controlled via clamp in CSS
+                'hero':    ['clamp(72px, 10vw, 120px)', { lineHeight: '0.95', letterSpacing: '-0.02em', fontWeight: '900' }],
+                'display': ['64px',  { lineHeight: '1.1',  fontWeight: '800' }],
+                'card-title': ['28px', { lineHeight: '1.2', letterSpacing: '-0.01em', fontWeight: '800' }],
+                'body':    ['16px',  { lineHeight: '1.6'  }],
+                'label':   ['12px',  { lineHeight: '1.4', letterSpacing: '0.15em' }],
             },
-            spacing: {
-                '18': '72px',
-                '22': '88px',
-                '30': '120px',
-            },
-            maxWidth: {
-                'container': '1440px',
-                'content': '1200px',
-            },
+
             borderRadius: {
-                DEFAULT: '2px',
-                sm: '2px',
-                md: '4px',
-                lg: '8px',
-                xl: '12px',
-                full: '9999px',
+                'ui':        '12px',
+                'card':      '28px',
+                'container': '36px',
+                'pill':      '999px',
+                DEFAULT:     '12px',
+                sm:          '8px',
+                md:          '12px',
+                lg:          '20px',
+                xl:          '28px',
+                '2xl':       '36px',
+                full:        '9999px',
             },
-            borderWidth: {
-                DEFAULT: '1px',
+
+            maxWidth: {
+                'container': '1280px',
             },
+
+            spacing: {
+                // Section spacing scale
+                'section':     '120px',
+                'hero-gap':    '160px',
+                'heading-gap': '48px',
+                'card-pad':    '28px',
+            },
+
             boxShadow: {
-                'card': '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04)',
-                'card-dark': '0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3)',
-                'card-hover': '0 4px 24px rgba(0,0,0,0.12)',
-                'card-hover-dark': '0 4px 24px rgba(0,0,0,0.6)',
-                'accent': '0 0 0 1px #FF4D00',
+                'card':       '0 10px 30px rgba(0,0,0,0.3)',
+                'card-hover': '0 30px 80px rgba(0,0,0,0.45)',
+                'card-blue':  '0 20px 60px rgba(14,43,255,0.35)',
+                'card-green': '0 20px 60px rgba(11,124,71,0.35)',
+                'card-pink':  '0 20px 60px rgba(198,26,115,0.35)',
+                'card-purple':'0 20px 60px rgba(92,43,255,0.35)',
+                'nav':        '0 1px 0 rgba(255,255,255,0.06)',
             },
+
             animation: {
-                'fade-up': 'fadeUp 0.6s ease forwards',
-                'fade-in': 'fadeIn 0.5s ease forwards',
+                'fade-up':   'fadeUp 0.6s cubic-bezier(0.4,0,0.2,1) forwards',
+                'fade-in':   'fadeIn 0.4s ease forwards',
             },
+
             keyframes: {
                 fadeUp: {
-                    '0%': { opacity: '0', transform: 'translateY(40px)' },
+                    '0%':   { opacity: '0', transform: 'translateY(40px)' },
                     '100%': { opacity: '1', transform: 'translateY(0)' },
                 },
                 fadeIn: {
-                    '0%': { opacity: '0' },
+                    '0%':   { opacity: '0' },
                     '100%': { opacity: '1' },
                 },
             },
-            gridTemplateColumns: {
-                '12': 'repeat(12, minmax(0, 1fr))',
+
+            transitionTimingFunction: {
+                'coda': 'cubic-bezier(0.4,0,0.2,1)',
             },
         },
     },
