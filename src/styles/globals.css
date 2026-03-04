@@ -2,67 +2,146 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── CSS Custom Properties ─────────────────────────────────────────────── */
 :root {
-  --mouse-x: 0px;
-  --mouse-y: 0px;
+  /* Core color tokens — light mode */
+  --bg:              #F5F5F5;
+  --bg-surface:      #EBEBEB;
+  --text-primary:    #111111;
+  --text-secondary:  #6B6B6B;
+  --border:          rgba(0, 0, 0, 0.1);
+  --grid-line:       rgba(0, 0, 0, 0.08);
+  --accent:          #FF4D00;
+
+  /* Typography scale */
+  --font-hero:       clamp(80px, 10vw, 160px);
+  --font-display:    clamp(48px, 6vw, 96px);
+  --font-heading:    clamp(32px, 4vw, 56px);
 }
 
+.dark {
+  --bg:              #0A0A0A;
+  --bg-surface:      #141414;
+  --text-primary:    #FFFFFF;
+  --text-secondary:  #9A9A9A;
+  --border:          rgba(255, 255, 255, 0.08);
+  --grid-line:       rgba(255, 255, 255, 0.08);
+  --accent:          #FF4D00;
+}
+
+/* ─── Base Layer ─────────────────────────────────────────────────────────── */
 @layer base {
   * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     cursor: none !important;
-  }
-
-  body {
-    @apply text-text-primary font-mono antialiased;
-    background: linear-gradient(135deg, #F5F5F2 0%, #E8E8E5 50%, #F5F5F2 100%);
-    background-size: 400% 400%;
-    background-attachment: fixed;
-    animation: gradientMove 15s ease infinite;
-  }
-
-  .dark body {
-    @apply text-[#E8E8E5];
-    background: linear-gradient(135deg, #050505 0%, #1a1a1a 50%, #050505 100%);
-    background-size: 400% 400%;
-    background-attachment: fixed;
-    animation: gradientMove 15s ease infinite;
-  }
-
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
   }
 
   html {
     scroll-behavior: smooth;
+    font-size: 16px;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: #FF4D00;
+    color: #FFFFFF;
+  }
+
+  /* Focus */
+  :focus-visible {
+    outline: 1px solid #FF4D00;
+    outline-offset: 2px;
   }
 }
 
+/* ─── Utility Layer ──────────────────────────────────────────────────────── */
 @layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
+
+  /* ── Editorial grid container ── */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0 24px;
   }
 
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  /* ── Accent text ── */
+  .text-accent {
+    color: #FF4D00;
   }
 
+  /* ── Label style ── */
+  .label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* ── Hero heading ── */
+  .hero-heading {
+    font-size: var(--font-hero);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Display heading ── */
+  .display-heading {
+    font-size: var(--font-display);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Hover lift effect ── */
+  .hover-lift {
+    transition: transform 300ms ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  /* ── Thin border ── */
+  .border-editorial {
+    border: 1px solid var(--border);
+  }
+
+  /* ── Scrollbar ── */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 4px;
   }
-
   ::-webkit-scrollbar-track {
-    background: #F5F5F2;
+    background: var(--bg);
   }
-
   ::-webkit-scrollbar-thumb {
-    background: #DADADA;
+    background: var(--border);
     border-radius: 2px;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: #4B4B4B;
+    background: #FF4D00;
+  }
+
+  /* ── No scrollbar ── */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* ── Cursor none for custom cursor ── */
+  .cursor-none * {
+    cursor: none !important;
   }
 }

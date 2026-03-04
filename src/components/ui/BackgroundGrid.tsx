@@ -5,37 +5,67 @@ interface BackgroundGridProps {
 }
 
 export function BackgroundGrid({ isDark }: BackgroundGridProps) {
-    const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+    const gridLineColor = isDark
+        ? 'rgba(255, 255, 255, 0.08)'
+        : 'rgba(0, 0, 0, 0.08)';
 
-    // Grid size: 48px to match the original
-    const gridStyle: React.CSSProperties = {
-        backgroundImage: `
-            linear-gradient(to right, ${gridColor} 1px, transparent 1px),
-            linear-gradient(to bottom, ${gridColor} 1px, transparent 1px)
-        `,
-        backgroundSize: '48px 48px',
-    };
+    // 12 vertical columns — evenly spaced
+    const columns = Array.from({ length: 13 }, (_, i) => i); // 13 lines = 12 columns
 
     return (
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-            {/* Base Static Grid */}
-            <div
-                className="absolute inset-0 opacity-100"
-                style={gridStyle}
-            />
+            {/* 12-column vertical guide lines */}
+            <div className="absolute inset-0 flex">
+                {columns.map((i) => (
+                    <div
+                        key={i}
+                        className="absolute top-0 bottom-0"
+                        style={{
+                            left: `${(i / 12) * 100}%`,
+                            width: '1px',
+                            background: gridLineColor,
+                        }}
+                    />
+                ))}
+            </div>
 
-            {/* Distortion Grid Layer */}
+            {/* Subtle horizontal rhythm lines — every ~120px */}
             <div
-                className="absolute inset-0 opacity-100"
+                className="absolute inset-0"
                 style={{
-                    ...gridStyle,
-                    transform: 'scale(1.05)',
-                    transformOrigin: 'var(--mouse-x) var(--mouse-y)',
-                    maskImage: 'radial-gradient(circle 180px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle 180px at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%)',
-                    transition: 'transform 0.1s cubic-bezier(0.23, 1, 0.32, 1)',
+                    backgroundImage: `linear-gradient(to bottom, ${gridLineColor} 1px, transparent 1px)`,
+                    backgroundSize: '100% 120px',
+                    opacity: 0.5,
                 }}
             />
+
+            {/* Ambient glow — dark mode only */}
+            {isDark && (
+                <>
+                    <div
+                        className="absolute pointer-events-none"
+                        style={{
+                            top: '-20%',
+                            left: '20%',
+                            width: '60%',
+                            height: '50%',
+                            background: 'radial-gradient(ellipse, rgba(255, 77, 0, 0.04) 0%, transparent 70%)',
+                            filter: 'blur(80px)',
+                        }}
+                    />
+                    <div
+                        className="absolute pointer-events-none"
+                        style={{
+                            bottom: '0%',
+                            right: '10%',
+                            width: '40%',
+                            height: '40%',
+                            background: 'radial-gradient(ellipse, rgba(255, 77, 0, 0.03) 0%, transparent 70%)',
+                            filter: 'blur(80px)',
+                        }}
+                    />
+                </>
+            )}
         </div>
     );
 }
