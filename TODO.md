@@ -1,44 +1,34 @@
-# CODA Fintech Design System — Implementation Checklist
-
-## Status: ✅ COMPLETE
-
----
+# Portfolio CV Implementation TODO
 
 ## Steps
 
-- [x] 1. `index.html` — Inter Tight font, FOUC bg #000000
-- [x] 2. `tailwind.config.ts` — CODA tokens: colors, radius (28px cards, 999px buttons), shadows, Inter Tight
-- [x] 3. `src/styles/globals.css` — new CSS vars, section-dark/section-light utilities, scrollbar
-- [x] 4. `src/App.tsx` — remove CursorProvider, keep isDark/useTheme, simple layout
-- [x] 5. `src/components/ui/Button.tsx` — pill shape (999px), 48px height, hover scale 1.02
-- [x] 6. `src/components/ui/Card.tsx` — ProductCard with 4 color palettes + 3D blob graphics
-- [x] 7. `src/components/ui/BackgroundGrid.tsx` — removed (returns null, CODA is clean)
-- [x] 8. `src/components/layout/Navbar.tsx` — CODA nav: logo / center links / Contact + Get Started pill
-- [x] 9. `src/components/layout/Footer.tsx` — clean 4-col footer, dark/light aware
-- [x] 10. `src/components/sections/Hero.tsx` — center-aligned stacked CUSTOMIZE/MONETIZE/MAXIMIZE hero
-- [x] 11. `src/components/sections/Projects.tsx` — 4-col product card grid (Blue/Green/Pink/Purple)
-- [x] 12. `src/components/sections/Metrics.tsx` — large stat number + 4-col stat grid (light section)
-- [x] 13. `src/components/sections/FeaturesGrid.tsx` — 3-col technical competencies grid
-- [x] 14. `src/components/sections/About.tsx` — left media block + right editorial text (light section)
-- [x] 15. `src/components/sections/Contact.tsx` — left CTA + right contact cards with availability badge
-- [x] 16. TypeScript check — 0 errors confirmed
-- [x] 17. Commit + push to branch `blackboxai/premium-editorial-design-system`
+- [x] Plan confirmed by user
+- [x] Step 1: Create `src/data/cv.ts` — structured CV data (single source of truth)
+- [x] Step 2: Update `src/components/layout/Navbar.tsx` — correct nav links + Download CV CTA
+- [x] Step 3: Update `src/components/sections/Hero.tsx` — name, title, CV summary, correct stats
+- [x] Step 4: Update `src/components/sections/Projects.tsx` — all 6 CV projects, correct descriptions
+- [x] Step 5: Update `src/components/sections/Metrics.tsx` — CV-accurate stats
+- [x] Step 6: Update `src/components/sections/FeaturesGrid.tsx` — CV-only skills (Skills section)
+- [x] Step 7: Update `src/components/sections/About.tsx` — exact CV summary, CV-only skills
+- [x] Step 8: Update `src/components/sections/Contact.tsx` — real email, phone; remove LinkedIn/GitHub
+- [x] Step 9: Create `src/components/sections/Education.tsx` — new Education section
+- [x] Step 10: Create `src/components/sections/Certifications.tsx` — new Certifications section
+- [x] Step 11: Update `src/components/layout/Footer.tsx` — remove payment links, portfolio nav
+- [x] Step 12: Update `src/App.tsx` — add Education + Certifications, reorder sections
 
----
+## Color Theme Fix (Black & White Only)
 
-## Design Tokens Applied
+- [x] Step 13: `src/components/sections/Hero.tsx` — green status dot → monochrome white/black
+- [x] Step 14: `src/components/sections/Metrics.tsx` — orange→red→yellow gradient stat number → `textPrimary`
+- [x] Step 15: `src/components/ui/Card.tsx` — blue/green/pink/purple `ProductCard` palettes → 4 dark monochrome shades
+- [x] Step 16: `src/components/layout/Footer.tsx` — orange gradient logo → solid black/white square
+- [x] Step 17: `src/styles/globals.css` — CSS custom property card colors → monochrome
+- [x] Step 18: `tailwind.config.ts` — card palette + accent + box-shadow colors → monochrome
 
-| Token            | Dark Mode          | Light Mode         |
-|------------------|--------------------|--------------------|
-| Global bg        | `#000000`          | `#FFFFFF`          |
-| Section alt bg   | `#111111`          | `#F4F2E9`          |
-| Text primary     | `#F5F5F5`          | `#000000`          |
-| Text secondary   | `#B8B8B8`          | `#555555`          |
-| Card Blue        | `#0E2BFF`          | `#0E2BFF`          |
-| Card Green       | `#0B7C47`          | `#0B7C47`          |
-| Card Pink        | `#C61A73`          | `#C61A73`          |
-| Card Purple      | `#5C2BFF`          | `#5C2BFF`          |
-| Border radius    | 28px cards         | 999px buttons      |
-| Container        | max-w 1280px       | px 80px desktop    |
-| Section spacing  | 120px              | Hero gap 160px     |
-| Font             | Inter Tight        | weight 900 hero    |
+## ✅ All steps complete — fully monochrome B&W theme — dev server at http://localhost:5176/portfolio/
+
+### Color audit result
+- 0 forbidden colors found in `src/**/*.tsx`
+- 0 forbidden colors found in `src/styles/globals.css`
+- 0 forbidden colors found in `tailwind.config.ts`
+- TypeScript: 0 errors

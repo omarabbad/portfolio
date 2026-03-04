@@ -1,12 +1,33 @@
+import { cv } from '@/data/cv';
+
 interface FooterProps {
     isDark: boolean;
 }
 
-const footerLinks = {
-    Products:  ['Payment Processing', 'Merchant of Record', 'Subscriptions', 'Analytics'],
-    Solutions: ['E-Commerce', 'SaaS Platforms', 'Marketplaces', 'Enterprise'],
-    Company:   ['About', 'Careers', 'Blog', 'Contact'],
-};
+// Navigation groups — portfolio sections only, no fabricated links
+const footerNav = [
+    {
+        heading: 'Portfolio',
+        links: [
+            { label: 'About',          id: 'about'          },
+            { label: 'Skills',         id: 'skills'         },
+            { label: 'Projects',       id: 'projects'       },
+        ],
+    },
+    {
+        heading: 'Academic',
+        links: [
+            { label: 'Education',      id: 'education'      },
+            { label: 'Certifications', id: 'certifications' },
+        ],
+    },
+    {
+        heading: 'Contact',
+        links: [
+            { label: 'Get in Touch',   id: 'contact'        },
+        ],
+    },
+];
 
 export function Footer({ isDark }: FooterProps) {
     const bg          = isDark ? '#000000' : '#F4F2E9';
@@ -14,84 +35,89 @@ export function Footer({ isDark }: FooterProps) {
     const textPrimary = isDark ? '#F5F5F5' : '#000000';
     const textMuted   = isDark ? '#B8B8B8' : '#555555';
 
+    const scrollTo = (id: string) =>
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
     return (
-        <footer
-            style={{
-                background: bg,
-                borderTop: `1px solid ${borderColor}`,
-            }}
-        >
+        <footer style={{ background: bg, borderTop: `1px solid ${borderColor}` }}>
             <div className="coda-container py-16">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 
-                    {/* Brand column */}
+                    {/* ── Brand column ── */}
                     <div className="flex flex-col gap-5">
-                        <div className="flex items-center gap-2.5">
+                        {/* Logo */}
+                        <button
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="flex items-center gap-2.5 w-fit"
+                            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                        >
                             <div
-                                className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-                                style={{ background: isDark ? '#F5F5F5' : '#000000' }}
+                                className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                                style={{
+                                    background: isDark ? '#F5F5F5' : '#000000',
+                                }}
                             >
                                 <span
                                     className="font-sans font-black text-[11px] leading-none"
                                     style={{ color: isDark ? '#000000' : '#FFFFFF' }}
                                 >
-                                    OA
+                                    {cv.initials}
                                 </span>
                             </div>
                             <span
                                 className="font-sans font-bold text-[15px] tracking-[-0.01em]"
                                 style={{ color: textPrimary }}
                             >
-                                Omar Abbad
+                                {cv.shortName}
                             </span>
-                        </div>
+                        </button>
+
+                        {/* Tagline — from CV title */}
                         <p
                             className="font-sans font-normal text-[14px] leading-relaxed max-w-[200px]"
                             style={{ color: textMuted }}
                         >
-                            AI Developer building intelligent, scalable systems and data pipelines.
+                            {cv.title}
                         </p>
-                        <div className="flex items-center gap-3">
-                            {['GitHub', 'LinkedIn'].map((platform) => (
-                                <a
-                                    key={platform}
-                                    href={
-                                        platform === 'GitHub'
-                                            ? 'https://github.com/omarabbad'
-                                            : 'https://www.linkedin.com/in/omar-abbad-327427321/'
-                                    }
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-sans font-medium text-[12px] tracking-[0.08em] uppercase transition-colors duration-200"
-                                    style={{ color: textMuted }}
-                                    onMouseEnter={(e) => {
-                                        (e.currentTarget as HTMLElement).style.color = textPrimary;
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        (e.currentTarget as HTMLElement).style.color = textMuted;
-                                    }}
-                                >
-                                    {platform}
-                                </a>
-                            ))}
-                        </div>
+
+                        {/* Email — from CV */}
+                        <a
+                            href={`mailto:${cv.contact.email}`}
+                            className="font-sans font-medium text-[13px] transition-colors duration-200 break-all"
+                            style={{ color: textMuted, textDecoration: 'none' }}
+                            onMouseEnter={(e) => {
+                                (e.currentTarget as HTMLElement).style.color = textPrimary;
+                            }}
+                            onMouseLeave={(e) => {
+                                (e.currentTarget as HTMLElement).style.color = textMuted;
+                            }}
+                        >
+                            {cv.contact.email}
+                        </a>
                     </div>
 
-                    {/* Link columns */}
-                    {Object.entries(footerLinks).map(([category, links]) => (
-                        <div key={category} className="flex flex-col gap-4">
+                    {/* ── Nav columns ── */}
+                    {footerNav.map(({ heading, links }) => (
+                        <div key={heading} className="flex flex-col gap-4">
                             <span
                                 className="font-sans font-semibold text-[12px] tracking-[0.12em] uppercase"
                                 style={{ color: textPrimary }}
                             >
-                                {category}
+                                {heading}
                             </span>
                             <ul className="flex flex-col gap-3">
-                                {links.map((link) => (
-                                    <li key={link}>
-                                        <span
-                                            className="font-sans font-normal text-[14px] transition-colors duration-200 cursor-pointer"
-                                            style={{ color: textMuted }}
+                                {links.map(({ label, id }) => (
+                                    <li key={label}>
+                                        <button
+                                            onClick={() => scrollTo(id)}
+                                            className="font-sans font-normal text-[14px] transition-colors duration-200 text-left"
+                                            style={{
+                                                color: textMuted,
+                                                background: 'none',
+                                                border: 'none',
+                                                cursor: 'pointer',
+                                                padding: 0,
+                                            }}
                                             onMouseEnter={(e) => {
                                                 (e.currentTarget as HTMLElement).style.color = textPrimary;
                                             }}
@@ -99,8 +125,8 @@ export function Footer({ isDark }: FooterProps) {
                                                 (e.currentTarget as HTMLElement).style.color = textMuted;
                                             }}
                                         >
-                                            {link}
-                                        </span>
+                                            {label}
+                                        </button>
                                     </li>
                                 ))}
                             </ul>
@@ -108,7 +134,7 @@ export function Footer({ isDark }: FooterProps) {
                     ))}
                 </div>
 
-                {/* Bottom bar */}
+                {/* ── Bottom bar ── */}
                 <div
                     className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8"
                     style={{ borderTop: `1px solid ${borderColor}` }}
@@ -117,25 +143,14 @@ export function Footer({ isDark }: FooterProps) {
                         className="font-sans font-normal text-[13px]"
                         style={{ color: textMuted }}
                     >
-                        © {new Date().getFullYear()} Omar Abbad. All rights reserved.
+                        © {new Date().getFullYear()} {cv.fullName}. All rights reserved.
                     </span>
-                    <div className="flex items-center gap-6">
-                        {['Privacy Policy', 'Terms of Service', 'Cookies'].map((item) => (
-                            <span
-                                key={item}
-                                className="font-sans font-normal text-[13px] cursor-pointer transition-colors duration-200"
-                                style={{ color: textMuted }}
-                                onMouseEnter={(e) => {
-                                    (e.currentTarget as HTMLElement).style.color = textPrimary;
-                                }}
-                                onMouseLeave={(e) => {
-                                    (e.currentTarget as HTMLElement).style.color = textMuted;
-                                }}
-                            >
-                                {item}
-                            </span>
-                        ))}
-                    </div>
+                    <span
+                        className="font-sans font-normal text-[13px]"
+                        style={{ color: textMuted }}
+                    >
+                        {cv.education[0].institution} · {cv.education[0].duration}
+                    </span>
                 </div>
             </div>
         </footer>

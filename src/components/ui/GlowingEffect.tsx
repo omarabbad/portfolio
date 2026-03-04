@@ -9,6 +9,7 @@ interface GlowingEffectProps {
   inactiveZone?: number;
   proximity?: number;
   spread?: number;
+  variant?: "default" | "white";
   glow?: boolean;
   className?: string;
   disabled?: boolean;
@@ -22,6 +23,7 @@ const GlowingEffect = memo(
     inactiveZone = 0.7,
     proximity = 0,
     spread = 20,
+    variant = "default",
     glow = false,
     className,
     movementDuration = 2,
@@ -122,6 +124,7 @@ const GlowingEffect = memo(
           className={cn(
             "pointer-events-none absolute -inset-px hidden rounded-[inherit] border opacity-0 transition-opacity",
             glow && "opacity-100",
+            variant === "white" && "border-white",
             disabled && "!block"
           )}
         />
@@ -135,27 +138,31 @@ const GlowingEffect = memo(
               "--active": "0",
               "--glowingeffect-border-width": `${borderWidth}px`,
               "--repeating-conic-gradient-times": "5",
-              // Heat gradient: deep red → orange-red → orange → golden yellow → back
-              "--gradient": `
-                radial-gradient(circle, #FF3B00 10%, #FF3B0000 20%),
-                radial-gradient(circle at 40% 40%, #FF7A00 5%, #FF7A0000 15%),
-                radial-gradient(circle at 60% 60%, #FFD200 10%, #FFD20000 20%),
-                radial-gradient(circle at 40% 60%, #C20000 10%, #C2000000 20%),
+              "--gradient":
+                variant === "white"
+                  ? `repeating-conic-gradient(
+                  from 236.84deg at 50% 50%,
+                  var(--black),
+                  var(--black) calc(25% / var(--repeating-conic-gradient-times))
+                )`
+                  : `radial-gradient(circle, #dd7bbb 10%, #dd7bbb00 20%),
+                radial-gradient(circle at 40% 40%, #d79f1e 5%, #d79f1e00 15%),
+                radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%), 
+                radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%),
                 repeating-conic-gradient(
                   from 236.84deg at 50% 50%,
-                  #FF3B00 0%,
-                  #FF7A00 calc(25% / var(--repeating-conic-gradient-times)),
-                  #FFD200 calc(50% / var(--repeating-conic-gradient-times)),
-                  #C20000 calc(75% / var(--repeating-conic-gradient-times)),
-                  #FF3B00 calc(100% / var(--repeating-conic-gradient-times))
-                )
-              `,
+                  #dd7bbb 0%,
+                  #d79f1e calc(25% / var(--repeating-conic-gradient-times)),
+                  #5a922c calc(50% / var(--repeating-conic-gradient-times)), 
+                  #4c7894 calc(75% / var(--repeating-conic-gradient-times)),
+                  #dd7bbb calc(100% / var(--repeating-conic-gradient-times))
+                )`,
             } as React.CSSProperties
           }
           className={cn(
             "pointer-events-none absolute inset-0 rounded-[inherit] opacity-100 transition-opacity",
             glow && "opacity-100",
-            blur > 0 && "blur-[var(--blur)]",
+            blur > 0 && "blur-[var(--blur)] ",
             className,
             disabled && "!hidden"
           )}

@@ -19,16 +19,16 @@ const config: Config = {
                 'text-dark':      '#000000',
                 'text-muted':     '#555555',
 
-                // ── Product card palettes ────────────────────────────────
+                // ── Product card palettes — monochrome ───────────────────
                 card: {
-                    blue:   '#0E2BFF',
-                    green:  '#0B7C47',
-                    pink:   '#C61A73',
-                    purple: '#5C2BFF',
+                    blue:   '#111111',
+                    green:  '#161616',
+                    pink:   '#0D0D0D',
+                    purple: '#1C1C1C',
                 },
 
-                // ── Accent ───────────────────────────────────────────────
-                accent: '#0E2BFF',
+                // ── Accent — monochrome ───────────────────────────────────
+                accent: '#F5F5F5',
 
                 // ── Surface (dark mode cards/panels) ─────────────────────
                 surface: {
@@ -84,11 +84,11 @@ const config: Config = {
 
             boxShadow: {
                 'card':       '0 10px 30px rgba(0,0,0,0.3)',
-                'card-hover': '0 30px 80px rgba(0,0,0,0.45)',
-                'card-blue':  '0 20px 60px rgba(14,43,255,0.35)',
-                'card-green': '0 20px 60px rgba(11,124,71,0.35)',
-                'card-pink':  '0 20px 60px rgba(198,26,115,0.35)',
-                'card-purple':'0 20px 60px rgba(92,43,255,0.35)',
+                'card-hover': '0 30px 80px rgba(0,0,0,0.6)',
+                'card-blue':  '0 20px 60px rgba(0,0,0,0.5)',
+                'card-green': '0 20px 60px rgba(0,0,0,0.5)',
+                'card-pink':  '0 20px 60px rgba(0,0,0,0.5)',
+                'card-purple':'0 20px 60px rgba(0,0,0,0.5)',
                 'nav':        '0 1px 0 rgba(255,255,255,0.06)',
             },
 

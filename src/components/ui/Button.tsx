@@ -3,7 +3,8 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { motion, HTMLMotionProps } from 'framer-motion';
 import React from 'react';
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
+
     [
         'inline-flex items-center justify-center whitespace-nowrap',
         'font-sans font-semibold text-[14px] tracking-[0.02em]',
@@ -26,7 +27,16 @@ const buttonVariants = cva(
                 'outline-dark': 'border border-black/20 bg-transparent text-black hover:bg-black/5',
                 // Ghost
                 ghost: 'bg-transparent text-white/70 hover:text-white',
+                // Primary color (for shadcn compatibility)
+                primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
+                // Secondary color
+                secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+                // Destructive
+                destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+                // Link style
+                link: 'text-primary underline-offset-4 hover:underline',
             },
+
             size: {
                 default: 'h-12 px-6 text-[14px]',
                 sm:      'h-9  px-5 text-[13px]',

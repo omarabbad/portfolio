@@ -1,34 +1,57 @@
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUpRight, Linkedin, Github } from 'lucide-react';
 import type { JSX } from 'react';
+import { cv } from '@/data/cv';
+import { GlowingEffect } from '@/components/ui/GlowingEffect';
+
 
 interface ContactProps {
     isDark: boolean;
 }
 
-const contactLinks = [
+// Contact items — strictly from CV
+const contactItems = [
     {
         icon: Mail,
         label: 'Email',
-        value: 'omar.abbad@email.com',
-        href: 'mailto:omar.abbad@email.com',
-        color: '#0E2BFF',
+        value: cv.contact.email,
+        href: `mailto:${cv.contact.email}`,
+        isExternal: false,
     },
+    {
+        icon: Phone,
+        label: 'Phone',
+        value: cv.contact.phone,
+        href: `tel:${cv.contact.phone.replace(/\s/g, '')}`,
+        isExternal: false,
+    },
+    {
+        icon: MapPin,
+        label: 'Location',
+        value: cv.contact.address,
+        href: '#',
+        isExternal: false,
+    },
+];
+
+// Social links
+const socialItems = [
     {
         icon: Linkedin,
         label: 'LinkedIn',
-        value: 'omar-abbad',
+        value: 'linkedin.com/in/omar-abbad-327427321',
         href: 'https://www.linkedin.com/in/omar-abbad-327427321/',
-        color: '#0B7C47',
+        isExternal: true,
     },
     {
         icon: Github,
         label: 'GitHub',
-        value: 'omarabbad',
+        value: 'github.com/omarabbad',
         href: 'https://github.com/omarabbad',
-        color: '#5C2BFF',
+        isExternal: true,
     },
 ];
+
 
 export function Contact({ isDark }: ContactProps): JSX.Element {
     const bg          = isDark ? '#000000' : '#FFFFFF';
@@ -59,7 +82,7 @@ export function Contact({ isDark }: ContactProps): JSX.Element {
                                 Contact
                             </span>
                             <h2 className="display-heading" style={{ color: textPrimary }}>
-                                Let's Build<br />Something Great
+                                Get in Touch
                             </h2>
                         </div>
 
@@ -67,76 +90,62 @@ export function Contact({ isDark }: ContactProps): JSX.Element {
                             className="font-sans font-normal"
                             style={{ fontSize: 17, lineHeight: 1.7, color: textMuted }}
                         >
-                            Have a project in mind? Looking for an AI developer to join your team?
-                            I'm open to freelance projects, full-time roles, and technical collaborations.
+                            I am a Computer Science undergraduate specializing in Artificial
+                            Intelligence, eager to contribute to real-world projects and
+                            expand my knowledge in the field.
                         </p>
 
                         <p
                             className="font-sans font-normal"
                             style={{ fontSize: 17, lineHeight: 1.7, color: textMuted }}
                         >
-                            Whether it's building a machine learning pipeline, architecting a
-                            scalable web platform, or solving a complex data problem — let's talk.
+                            Feel free to reach out via email or phone for academic collaborations,
+                            internship opportunities, or any project inquiries.
                         </p>
 
-                        {/* Primary CTA */}
+                        {/* Primary CTA — email from CV — with glow */}
                         <div className="flex flex-wrap items-center gap-3 pt-2">
-                            <a
-                                href="mailto:omar.abbad@email.com"
-                                className="inline-flex items-center gap-2 font-sans font-semibold rounded-full transition-all duration-300"
-                                style={{
-                                    height: 48,
-                                    paddingLeft: 24,
-                                    paddingRight: 24,
-                                    fontSize: 15,
-                                    background: isDark ? '#F5F5F5' : '#000000',
-                                    color:      isDark ? '#000000' : '#FFFFFF',
-                                    textDecoration: 'none',
-                                }}
-                                onMouseEnter={(e) => {
-                                    (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)';
-                                    (e.currentTarget as HTMLElement).style.opacity = '0.9';
-                                }}
-                                onMouseLeave={(e) => {
-                                    (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
-                                    (e.currentTarget as HTMLElement).style.opacity = '1';
-                                }}
+                            <div
+                                className="relative rounded-full"
+                                style={{ border: '1px solid transparent' }}
                             >
-                                Send an Email
-                                <ArrowUpRight size={16} strokeWidth={2} />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/omar-abbad-327427321/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 font-sans font-semibold rounded-full transition-all duration-300"
-                                style={{
-                                    height: 48,
-                                    paddingLeft: 24,
-                                    paddingRight: 24,
-                                    fontSize: 15,
-                                    background: 'transparent',
-                                    color: textMuted,
-                                    border: `1px solid ${borderColor}`,
-                                    textDecoration: 'none',
-                                }}
-                                onMouseEnter={(e) => {
-                                    (e.currentTarget as HTMLElement).style.color = textPrimary;
-                                    (e.currentTarget as HTMLElement).style.borderColor = isDark
-                                        ? 'rgba(255,255,255,0.25)'
-                                        : 'rgba(0,0,0,0.25)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    (e.currentTarget as HTMLElement).style.color = textMuted;
-                                    (e.currentTarget as HTMLElement).style.borderColor = borderColor;
-                                }}
-                            >
-                                Connect on LinkedIn
-                            </a>
+                                <GlowingEffect
+                                    spread={20}
+                                    glow={false}
+                                    disabled={false}
+                                    proximity={40}
+                                    inactiveZone={0.01}
+                                    borderWidth={1.5}
+                                />
+                                <a
+                                    href={`mailto:${cv.contact.email}`}
+                                    className="relative inline-flex items-center gap-2 font-sans font-semibold rounded-full transition-all duration-300"
+                                    style={{
+                                        height: 48,
+                                        paddingLeft: 24,
+                                        paddingRight: 24,
+                                        fontSize: 15,
+                                        background: isDark ? '#F5F5F5' : '#000000',
+                                        color: isDark ? '#000000' : '#FFFFFF',
+                                        textDecoration: 'none',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        (e.currentTarget as HTMLElement).style.transform = 'scale(1.02)';
+                                        (e.currentTarget as HTMLElement).style.opacity = '0.9';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+                                        (e.currentTarget as HTMLElement).style.opacity = '1';
+                                    }}
+                                >
+                                    Send an Email
+                                    <ArrowUpRight size={16} strokeWidth={2} />
+                                </a>
+                            </div>
                         </div>
                     </motion.div>
 
-                    {/* ── Right: Contact cards ── */}
+                    {/* ── Right: Contact cards — with glow ── */}
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -144,86 +153,195 @@ export function Contact({ isDark }: ContactProps): JSX.Element {
                         transition={{ duration: 0.6, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
                         className="flex flex-col gap-4"
                     >
-                        {contactLinks.map(({ icon: Icon, label, value, href, color }) => (
+                        {contactItems.map(({ icon: Icon, label, value, href }) => (
                             <a
                                 key={label}
                                 href={href}
-                                target={href.startsWith('http') ? '_blank' : undefined}
-                                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                                className="group flex items-center gap-5 p-6 rounded-[20px] transition-all duration-300"
+                                className="group relative flex items-center gap-5 p-6 rounded-[20px] transition-all duration-300"
                                 style={{
                                     background: cardBg,
                                     border: `1px solid ${borderColor}`,
                                     textDecoration: 'none',
+                                    cursor: href === '#' ? 'default' : 'pointer',
                                 }}
+                                onClick={href === '#' ? (e) => e.preventDefault() : undefined}
                                 onMouseEnter={(e) => {
-                                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
-                                    (e.currentTarget as HTMLElement).style.borderColor = isDark
-                                        ? 'rgba(255,255,255,0.15)'
-                                        : 'rgba(0,0,0,0.15)';
+                                    if (href !== '#') {
+                                        (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
+                                        (e.currentTarget as HTMLElement).style.borderColor = isDark
+                                            ? 'rgba(255,255,255,0.15)'
+                                            : 'rgba(0,0,0,0.15)';
+                                    }
                                 }}
                                 onMouseLeave={(e) => {
                                     (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
                                     (e.currentTarget as HTMLElement).style.borderColor = borderColor;
                                 }}
                             >
-                                {/* Icon badge */}
+                                {/* Glow effect */}
+                                <GlowingEffect
+                                    spread={28}
+                                    glow={false}
+                                    disabled={false}
+                                    proximity={48}
+                                    inactiveZone={0.01}
+                                    borderWidth={1.5}
+                                />
+
+                                {/* Icon badge — with glow */}
                                 <div
-                                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                                    style={{ background: color }}
+                                    className="relative w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                                    style={{
+                                        background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)',
+                                        color: isDark ? '#F5F5F5' : '#000000',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        (e.currentTarget as HTMLElement).style.transform = 'scale(1.08)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+                                    }}
                                 >
-                                    <Icon size={20} strokeWidth={2} color="white" />
+                                    <GlowingEffect
+                                        spread={16}
+                                        glow={false}
+                                        disabled={false}
+                                        proximity={28}
+                                        inactiveZone={0.01}
+                                        borderWidth={1}
+                                    />
+                                    <Icon size={20} strokeWidth={2} />
                                 </div>
 
                                 {/* Text */}
                                 <div className="flex flex-col gap-0.5 flex-1 min-w-0">
                                     <span
                                         className="font-sans font-semibold"
-                                        style={{ fontSize: 13, letterSpacing: '0.08em', textTransform: 'uppercase', color: textMuted }}
+                                        style={{
+                                            fontSize: 12,
+                                            letterSpacing: '0.1em',
+                                            textTransform: 'uppercase',
+                                            color: textMuted,
+                                        }}
                                     >
                                         {label}
                                     </span>
                                     <span
-                                        className="font-sans font-medium truncate"
-                                        style={{ fontSize: 16, color: textPrimary }}
+                                        className="font-sans font-medium"
+                                        style={{
+                                            fontSize: label === 'Location' ? 13 : 15,
+                                            color: textPrimary,
+                                            lineHeight: 1.4,
+                                        }}
                                     >
                                         {value}
                                     </span>
                                 </div>
 
-                                {/* Arrow */}
-                                <ArrowUpRight
-                                    size={18}
-                                    strokeWidth={2}
-                                    style={{ color: textMuted, flexShrink: 0, transition: 'transform 0.2s ease' }}
-                                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                                />
+                                {/* Arrow — only for clickable items */}
+                                {href !== '#' && (
+                                    <ArrowUpRight
+                                        size={18}
+                                        strokeWidth={2}
+                                        style={{ color: textMuted, flexShrink: 0 }}
+                                        className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+                                    />
+                                )}
                             </a>
                         ))}
 
-                        {/* Availability badge */}
+                        {/* Social links — LinkedIn & GitHub */}
+                        <div className="flex flex-col gap-4 mt-4">
+                            <span
+                                className="font-sans font-semibold"
+                                style={{
+                                    fontSize: 12,
+                                    letterSpacing: '0.1em',
+                                    textTransform: 'uppercase',
+                                    color: textMuted,
+                                }}
+                            >
+                                Social
+                            </span>
+                            <div className="flex flex-wrap gap-3">
+                                {socialItems.map(({ icon: Icon, label, href }) => (
+                                    <a
+                                        key={label}
+                                        href={href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group relative flex items-center gap-2 px-5 py-3 rounded-full transition-all duration-300"
+                                        style={{
+                                            background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)',
+                                            border: `1px solid ${borderColor}`,
+                                            textDecoration: 'none',
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+                                            (e.currentTarget as HTMLElement).style.borderColor = isDark
+                                                ? 'rgba(255,255,255,0.2)'
+                                                : 'rgba(0,0,0,0.2)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                                            (e.currentTarget as HTMLElement).style.borderColor = borderColor;
+                                        }}
+                                    >
+                                        <GlowingEffect
+                                            spread={16}
+                                            glow={false}
+                                            disabled={false}
+                                            proximity={28}
+                                            inactiveZone={0.01}
+                                            borderWidth={1}
+                                        />
+                                        <Icon size={18} strokeWidth={2} style={{ color: textPrimary }} />
+                                        <span
+                                            className="font-sans font-medium"
+                                            style={{ fontSize: 14, color: textPrimary }}
+                                        >
+                                            {label}
+                                        </span>
+                                        <ArrowUpRight
+                                            size={14}
+                                            strokeWidth={2}
+                                            style={{ color: textMuted }}
+                                            className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+                                        />
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Availability badge — with glow */}
                         <div
-                            className="flex items-center gap-3 p-5 rounded-[20px] mt-2"
+                            className="relative flex items-center gap-3 p-5 rounded-[20px] mt-2"
                             style={{
-                                background: isDark ? 'rgba(11,124,71,0.12)' : 'rgba(11,124,71,0.08)',
-                                border: `1px solid rgba(11,124,71,0.25)`,
+                                background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)',
+                                border: `1px solid ${borderColor}`,
                             }}
                         >
+                            <GlowingEffect
+                                spread={16}
+                                glow={false}
+                                disabled={false}
+                                proximity={32}
+                                inactiveZone={0.01}
+                                borderWidth={1}
+                            />
                             <div
                                 className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                                style={{
-                                    background: '#0B7C47',
-                                    boxShadow: '0 0 8px rgba(11,124,71,0.6)',
-                                }}
+                                style={{ background: isDark ? '#F5F5F5' : '#000000' }}
                             />
                             <span
                                 className="font-sans font-medium"
-                                style={{ fontSize: 14, color: isDark ? 'rgba(123,227,178,0.9)' : '#0B7C47' }}
+                                style={{ fontSize: 14, color: textMuted }}
                             >
-                                Available for new projects and opportunities
+                                Open to internship and project opportunities
                             </span>
                         </div>
                     </motion.div>
+
                 </div>
             </div>
         </section>

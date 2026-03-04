@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X, Download } from 'lucide-react';
+import { cv } from '@/data/cv';
 
 interface NavbarProps {
     isDark: boolean;
@@ -8,10 +9,12 @@ interface NavbarProps {
 }
 
 const navLinks = [
-    { label: 'Products',         id: 'projects' },
-    { label: 'Solutions',        id: 'features' },
-    { label: 'Knowledge Center', id: 'about'    },
-    { label: 'Company',          id: 'contact'  },
+    { label: 'About',            id: 'about'          },
+    { label: 'Skills',           id: 'skills'         },
+    { label: 'Projects',         id: 'projects'       },
+    { label: 'Education',        id: 'education'      },
+    { label: 'Certifications',   id: 'certifications' },
+    { label: 'Contact',          id: 'contact'        },
 ];
 
 export function Navbar({ isDark, onToggle }: NavbarProps) {
@@ -64,14 +67,14 @@ export function Navbar({ isDark, onToggle }: NavbarProps) {
                                     className="font-sans font-black text-[11px] leading-none"
                                     style={{ color: isDark ? '#000000' : '#FFFFFF' }}
                                 >
-                                    OA
+                                    {cv.initials}
                                 </span>
                             </div>
                             <span
                                 className="font-sans font-bold text-[15px] tracking-[-0.01em]"
                                 style={{ color: textPrimary }}
                             >
-                                Omar Abbad
+                                {cv.shortName}
                             </span>
                         </button>
 
@@ -120,28 +123,15 @@ export function Navbar({ isDark, onToggle }: NavbarProps) {
                                 {isDark ? <Sun size={15} /> : <Moon size={15} />}
                             </button>
 
-                            {/* Contact link */}
-                            <button
-                                onClick={() => scrollTo('contact')}
-                                className="hidden md:flex font-sans font-medium text-[14px] transition-colors duration-200"
-                                style={{ color: textMuted }}
-                                onMouseEnter={(e) => {
-                                    (e.currentTarget as HTMLElement).style.color = textPrimary;
-                                }}
-                                onMouseLeave={(e) => {
-                                    (e.currentTarget as HTMLElement).style.color = textMuted;
-                                }}
-                            >
-                                Contact
-                            </button>
-
-                            {/* Get Started pill CTA */}
-                            <button
-                                onClick={() => scrollTo('contact')}
-                                className="hidden md:flex items-center font-sans font-semibold text-[14px] h-9 px-5 rounded-full transition-all duration-300"
+                            {/* Download CV pill CTA */}
+                            <a
+                                href="/cv.pdf"
+                                download
+                                className="hidden md:flex items-center gap-2 font-sans font-semibold text-[14px] h-9 px-5 rounded-full transition-all duration-300"
                                 style={{
                                     background: isDark ? '#F5F5F5' : '#000000',
                                     color:      isDark ? '#000000' : '#FFFFFF',
+                                    textDecoration: 'none',
                                 }}
                                 onMouseEnter={(e) => {
                                     (e.currentTarget as HTMLElement).style.opacity = '0.88';
@@ -152,8 +142,9 @@ export function Navbar({ isDark, onToggle }: NavbarProps) {
                                     (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
                                 }}
                             >
-                                Get Started
-                            </button>
+                                <Download size={13} strokeWidth={2.5} />
+                                Download CV
+                            </a>
 
                             {/* Mobile menu toggle */}
                             <button
@@ -209,16 +200,19 @@ export function Navbar({ isDark, onToggle }: NavbarProps) {
                             ))}
 
                             <div className="flex items-center gap-3 pt-3 pb-1 px-4">
-                                <button
-                                    onClick={() => scrollTo('contact')}
-                                    className="flex-1 flex items-center justify-center font-sans font-semibold text-[14px] h-11 rounded-full transition-all duration-200"
+                                <a
+                                    href="/cv.pdf"
+                                    download
+                                    className="flex-1 flex items-center justify-center gap-2 font-sans font-semibold text-[14px] h-11 rounded-full transition-all duration-200"
                                     style={{
                                         background: isDark ? '#F5F5F5' : '#000000',
                                         color:      isDark ? '#000000' : '#FFFFFF',
+                                        textDecoration: 'none',
                                     }}
                                 >
-                                    Get Started
-                                </button>
+                                    <Download size={14} strokeWidth={2.5} />
+                                    Download CV
+                                </a>
                                 <button
                                     onClick={onToggle}
                                     className="flex items-center justify-center w-11 h-11 rounded-full"

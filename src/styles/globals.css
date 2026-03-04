@@ -4,6 +4,10 @@
 
 /* ─── CSS Custom Properties ─────────────────────────────────────────────── */
 :root {
+  /* Color primitives */
+  --black: #000000;
+  --white: #ffffff;
+
   /* Dark mode defaults */
   --bg:             #000000;
   --bg-section:     #0D0D0D;
@@ -15,11 +19,11 @@
   --border:         rgba(255,255,255,0.1);
   --border-light:   rgba(0,0,0,0.1);
 
-  /* Product card colors */
-  --card-blue:   #0E2BFF;
-  --card-green:  #0B7C47;
-  --card-pink:   #C61A73;
-  --card-purple: #5C2BFF;
+  /* Product card colors — monochrome */
+  --card-blue:   #111111;
+  --card-green:  #161616;
+  --card-pink:   #0D0D0D;
+  --card-purple: #1C1C1C;
 
   /* Spacing scale */
   --section-gap:  120px;

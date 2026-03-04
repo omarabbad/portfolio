@@ -1,10 +1,14 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Hero } from '@/components/sections/Hero';
-import { Projects } from '@/components/sections/Projects';
-import { FeaturesGrid } from '@/components/sections/FeaturesGrid';
 import { About } from '@/components/sections/About';
-import { Metrics } from '@/components/sections/Metrics';
+
+import { FeaturesGrid } from '@/components/sections/FeaturesGrid';
+
+
+import { Projects } from '@/components/sections/Projects';
+import { Education } from '@/components/sections/Education';
+import { Certifications } from '@/components/sections/Certifications';
 import { Contact } from '@/components/sections/Contact';
 import { useTheme } from '@/lib/useTheme';
 
@@ -22,11 +26,23 @@ function App() {
         >
             <Navbar isDark={isDark} onToggle={toggle} />
             <main className="flex-grow">
+                {/* 1. Hero */}
                 <Hero isDark={isDark} />
-                <Projects isDark={isDark} />
-                <Metrics isDark={isDark} />
-                <FeaturesGrid isDark={isDark} />
+                {/* 2. About */}
+
+
+
+
                 <About isDark={isDark} />
+                {/* 3. Skills */}
+                <FeaturesGrid isDark={isDark} />
+                {/* 4. Projects */}
+                <Projects isDark={isDark} />
+                {/* 5. Education */}
+                <Education isDark={isDark} />
+                {/* 6. Certifications */}
+                <Certifications isDark={isDark} />
+                {/* 7. Contact */}
                 <Contact isDark={isDark} />
             </main>
             <Footer isDark={isDark} />
