@@ -6,6 +6,7 @@ import { About } from '@/components/sections/About';
 import { FeaturesGrid } from '@/components/sections/FeaturesGrid';
 
 
+
 import { Projects } from '@/components/sections/Projects';
 import { Education } from '@/components/sections/Education';
 import { Certifications } from '@/components/sections/Certifications';
@@ -29,6 +30,8 @@ function App() {
                 {/* 1. Hero */}
                 <Hero isDark={isDark} />
                 {/* 2. About */}
+
+
 
 
 
